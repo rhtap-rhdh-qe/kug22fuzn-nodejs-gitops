@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kug22fuzn-nodejs-development
+  namespace: tssc-gitops
+  finalizers: ["resources-finalizer.argocd.argoproj.io"] 
+spec:
+  project: default
+  source:
+    path: ./components/kug22fuzn-nodejs/overlays/development
+    repoURL: https://github.com/rhtap-rhdh-qe/kug22fuzn-nodejs-gitops.git
+    targetRevision: main
+  destination:
+    namespace: tssc-app-development
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    managedNamespaceMetadata:
+      labels: 
+        argocd.argoproj.io/managed-by: tssc-gitops
+    automated: 
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true

@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: kug22fuzn-nodejs-gitops
+  description: This is GitOps manifest for kug22fuzn-nodejs   
+  links:
+    - url: https://www.redhat.com/en/solutions/trusted-software-supply-chain
+      title: Trusted Secure Supply Chain 
+      icon: dashboard
+      type: admin-dashboard
+  annotations:    
+    argocd/app-selector: tssc/gitops=kug22fuzn-nodejs
+    backstage.io/kubernetes-id: kug22fuzn-nodejs 
+    backstage.io/techdocs-ref: dir:. 
+    janus-idp.io/tekton: kug22fuzn-nodejs
+spec:
+  type: gitops
+  owner: user:guest 
+  lifecycle: experimental
+  dependsOn:
+    - component:kug22fuzn-nodejs
